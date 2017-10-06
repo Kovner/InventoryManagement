@@ -56,7 +56,7 @@ function updateWorkbook (data) {
 
       // We've found the row in our Excel file with matching rowID
       // Let's update the cell in this row for the corresponding field/column
-      if (activeCell.v === rowToUpdate) {
+      if (activeCell.v === parseInt(rowToUpdate)) {
         let targetAddress;
         let targetCellRef;
         let targetCell;

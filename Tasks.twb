@@ -11,7 +11,7 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='Tasks' name='excel-direct.1wkj0zp0ov65gx1786frd0ghwhdk'>
-            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='C:/Users/bklower/Documents/GitHub/ProjectFrelard/Examples/ProjectManagement/Tasks.xlsx' interpretationMode='0' password='' server='' validate='no' />
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='./tasks.xlsx' interpretationMode='0' password='' server='' validate='no' />
           </named-connection>
         </named-connections>
         <relation connection='excel-direct.1wkj0zp0ov65gx1786frd0ghwhdk' name='Tasks' table='[Tasks$]' type='table'>
