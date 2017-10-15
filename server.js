@@ -30,6 +30,11 @@ app.post('/', function (req, res) {
   res.send('Thanks for the data.');
 });
 
+app.get('/columns', function (req, res) {
+  console.log('getting columns...');
+  res.send(getColumns());
+});
+
 function updateWorkbook (data) {
   // We have a single sheet in our Excel file:  "Tasks"
   //   the data is in cells A1:F31 (the header row is A1:F1, actual tasks are A2:F31)
@@ -85,4 +90,25 @@ function updateWorkbook (data) {
   XLSX.writeFile(workbook, workbookFile);
 //   XLSX.writeFile(workbook, workbookFile, { cellDates: true });
   console.log('Just saved our Excel file data!');
+}
+
+function getColumns () {
+  // Open our Excel file & see how many rows there are
+  let workbook = XLSX.readFile(workbookFile);
+  let ws = workbook.Sheets[wsName];
+  let jsonWS = XLSX.utils.sheet_to_json(ws);
+  let retArr = [];
+
+  if (jsonWS && jsonWS.length > 0) {
+    // get the first object and extract the column info
+    for (let c in jsonWS[0]) {
+      retArr.push(c);   
+    }
+  }
+
+  if (retArr.length > 0) {
+    return retArr;
+  } else {
+    return 'No column information found!';
+  }
 }
