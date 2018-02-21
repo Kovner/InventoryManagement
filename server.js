@@ -7,8 +7,8 @@ var server = require('http').createServer(app);
 var path = require('path');
 var port = process.env.PORT || 8765;
 
-const workbookFile = 'tasks.xlsx';
-const wsName = 'Tasks';
+const workbookFile = 'Product Inventory.xlsx';
+const wsName = 'Product Inventory';
 
 /**************************************************/
 // Start the Server
@@ -36,11 +36,15 @@ app.get('/columns', function (req, res) {
 });
 
 function updateWorkbook (data) {
-  // We have a single sheet in our Excel file:  "Tasks"
-  //   the data is in cells A1:F31 (the header row is A1:F1, actual tasks are A2:F31)
+  // We have a single sheet in our Excel file:  "Product Inventory"
+  //   the data is in cells A1:E45 (the header row is A1:F1, actual tasks are A2:E45)
   //   Due Date is in Column D
   //   Completion Date is in Column E
-  //   RowID is in Column F
+  //   RowID is in Column A (won't be updated)
+  //   Product Name is Column B (won't be updated)
+  //   Sales is Column C (Won't be updated)
+  //   Stock is Column D
+  //   Ordered is Column E
   console.log('Updating our spreadsheet with the following incoming data: ' + JSON.stringify(data));
   // Open our Excel file & see how many rows there are
   let workbook = XLSX.readFile(workbookFile);
@@ -55,7 +59,7 @@ function updateWorkbook (data) {
     console.log('row,field,value: ' + rowToUpdate + '|' + fieldToUpdate + '|' + newValue);
 
     for (let r = 0; r < rows; r++) {
-      let cellAddress = { c: 5, r: 1 + r };          // Offset from F1 (the header cell) and is 0 indexed
+      let cellAddress = { c: 0, r: 1 + r };          // Offset from F1 (the header cell) and is 0 indexed
       let cellRef = XLSX.utils.encode_cell(cellAddress);
       let activeCell = ws[cellRef];
 
@@ -67,11 +71,11 @@ function updateWorkbook (data) {
         let targetCell;
 
         switch (fieldToUpdate) {
-          case 'dueDate':
+          case 'stock':
             targetAddress = { c: 3, r: 1 + r };
             break;
 
-          case 'completionDate':
+          case 'ordered':
             targetAddress = { c: 4, r: 1 + r };
             break;
 
