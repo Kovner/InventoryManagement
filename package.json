@@ -28,7 +28,7 @@
     "ignore": [
       "/lib",
       "/docs",
-      "/public/js/tableau-extensions-0.6.1.js"
+      "/public/js/tableau-extensions*.js"
     ]
   }
 }
