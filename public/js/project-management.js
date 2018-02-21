@@ -1,6 +1,6 @@
 $(document).ready(function () {
   let worksheet;
-  const wsName = 'Project Status';    // This is the sheet we'll use for updating task info
+  const wsName = 'Inventory';    // This is the sheet we'll use for updating task info
 
   function onSelectionChanged (marksEvent) {
     const sheetName = marksEvent.worksheet.name;
@@ -52,32 +52,27 @@ $(document).ready(function () {
   function populateTable (dt) {
     $('#data_table tr').remove();
     var headerRow = $('<tr/>');
-    headerRow.append('<th>Assigned</th>');
-    headerRow.append('<th>Project</th>');
-    headerRow.append('<th>Due Date</th>');
-    headerRow.append('<th>Completion Date</th>');
+    headerRow.append('<th>Product</th>');
+    headerRow.append('<th>Stock</th>');
+    headerRow.append('<th>Ordered</th>');
     $('#data_table').append(headerRow);
 
-    let assignedIndex, projectIndex, dueIndex, completionIndex, rowIDIndex;
+    let productIndex, stockIndex, orderedIndex, rowIDIndex;
 
     // get our column indexes
     for (let c of dt.columns) {
       switch (c.fieldName) {
-        case 'Assigned':
-          assignedIndex = c.index;
+        case 'Product':
+          productIndex = c.index;
           break;
-        case 'Project':
-          projectIndex = c.index;
+        case 'Stock':
+          stockIndex = c.index;
           break;
-        case 'Due':
-          dueIndex = c.index;
+        case 'Ordered':
+          orderedIndex = c.index;
           break;
-        case 'Completion Date':
-          completionIndex = c.index;
-          break;
-        case 'SUM(RowID)':
+        case 'RowID':
           rowIDIndex = c.index;
-          break;
         default:
           break;
       }
@@ -86,23 +81,12 @@ $(document).ready(function () {
     // add our rows for the selected marks
     dt.data.forEach(function (item) {
       const rowID = item[rowIDIndex].formattedValue;
-      let dataRow = $('<tr id="row_' + rowID + '"/>');
-      dataRow.append('<td>' + item[assignedIndex].formattedValue + '</td>');
-      dataRow.append('<td>' + item[projectIndex].formattedValue + '</td>');
-      dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_dueDate" value="' + item[dueIndex].value + '" /></td>');
-      dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_completionDate" value="' + item[completionIndex].value + '" /></td>');
+      let dataRow = $('<tr/>');
+      dataRow.append('<td>' + item[productIndex].formattedValue + '</td>');
+      dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_stock" value="' + item[stockIndex].value + '" /></td>');
+      dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_ordered" value="' + item[orderedIndex].value + '" /></td>');
       $('#data_table').append(dataRow);
     });
-
-    // for (var i = 0; i < dt.data.length; i++) {
-    //   const rowID = dt.data[i][rowIDIndex].formattedValue;
-    //   let dataRow = $("<tr id='row_" + rowID + "'/>");
-    //   dataRow.append("<td>" + dt.data[i][assignedIndex].formattedValue + "</td>");
-    //   dataRow.append("<td>" + dt.data[i][projectIndex].formattedValue + "</td>");
-    //   dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_dueDate" value="' + dt.data[i][dueIndex].value + '" /></td>');
-    //   dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_completionDate" value="' + dt.data[i][completionIndex].value + '" /></td>');
-    //   $("#data_table").append(dataRow);
-    // }
   }
 
   $('form').submit(function (event) {
@@ -110,7 +94,7 @@ $(document).ready(function () {
     let postData = [];
 
     formInputs.each(function () {
-      let c = $(this);
+      let = $(this);
       postData.push({id: c[0].id, 'value': c[0].value});
     });
 
