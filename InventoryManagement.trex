@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest manifest-version="0.1" xmlns="http://wwww.tableau.com/xml/addin_manifest">
-  <tableau-addin id="com.tableau.extension.projectmanagement" addin-version="0.7.0">
+  <tableau-addin id="com.tableau.extension.inventorymanagement" addin-version="0.9.0">
     <default-locale>en_US</default-locale>
     <name resource-id="name"/>
-    <description>Extensions API sample showing how to do write-back for a project management dashboard.</description>
+    <description>Extensions API sample showing how to do write-back for an inventory management dashboard.</description>
     <addin-type>
       <dashboard-addin/>
     </addin-type>
-    <author name="Ben Lower" email="github@benlower.us" organization="benlower" website="github.com/benlower"/>
-    <min-api-version>1.1</min-api-version>
+    <author name="Michael Kovner" email="mkovner@tableau.com" organization="Kovner" website="github.com/Kovner"/>
+    <min-api-version>0.9</min-api-version>
     <source-location>
       <url>http://localhost:8765</url>
     </source-location>
@@ -16,7 +16,7 @@
   </tableau-addin>
   <resources>
     <resource id="name">
-      <text locale="en_US">Project Management</text>
+      <text locale="en_US">Inventory Management</text>
     </resource>
   </resources>
 </manifest>
