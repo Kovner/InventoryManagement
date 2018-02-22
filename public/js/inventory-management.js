@@ -14,7 +14,7 @@ $(document).ready(function () {
     //TODO: the bug here is that the [0] is incorrect because it has Qconcat. I can change this to [1], but really it should do a check.
     // because if the other column is selected, [1] is empty.
     if (selectedMarks.data[1].totalRowCount > 0) {
-      populateTable(selectedMarks.data[0]);
+      populateTable(selectedMarks.data[1]);
       $('#updateItem').show();
     } else {
       resetTable();
@@ -67,10 +67,10 @@ $(document).ready(function () {
         case 'Product Name':
           productIndex = c.index;
           break;
-        case 'Stock':
+        case 'SUM(Stock)':
           stockIndex = c.index;
           break;
-        case 'Ordered':
+        case 'SUM(Ordered)':
           orderedIndex = c.index;
           break;
         case 'RowID':
@@ -85,8 +85,8 @@ $(document).ready(function () {
       const rowID = item[rowIDIndex].formattedValue;
       let dataRow = $('<tr/>');
       dataRow.append('<td>' + item[productIndex].formattedValue + '</td>');
-      dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_stock" value="' + item[stockIndex].value + '" /></td>');
-      dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_ordered" value="' + item[orderedIndex].value + '" /></td>');
+      dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_stock" value="' + item[stockIndex].formattedValue + '" /></td>');
+      dataRow.append('<td><input type="text" size="8" id="row_' + rowID + '_ordered" value="' + item[orderedIndex].formattedValue + '" /></td>');
       $('#data_table').append(dataRow);
     });
   }
