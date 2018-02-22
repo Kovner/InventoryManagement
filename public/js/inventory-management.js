@@ -11,7 +11,9 @@ $(document).ready(function () {
 
   function handleSelectedMarks (selectedMarks, sheetName, forceChangeSheet) {
     // If we've got selected marks then process them and show our update button
-    if (selectedMarks.data[0].totalRowCount > 0) {
+    //TODO: the bug here is that the [0] is incorrect because it has Qconcat. I can change this to [1], but really it should do a check.
+    // because if the other column is selected, [1] is empty.
+    if (selectedMarks.data[1].totalRowCount > 0) {
       populateTable(selectedMarks.data[0]);
       $('#updateItem').show();
     } else {
@@ -62,7 +64,7 @@ $(document).ready(function () {
     // get our column indexes
     for (let c of dt.columns) {
       switch (c.fieldName) {
-        case 'Product':
+        case 'Product Name':
           productIndex = c.index;
           break;
         case 'Stock':
