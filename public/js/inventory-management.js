@@ -11,8 +11,6 @@ $(document).ready(function () {
 
   function handleSelectedMarks (selectedMarks, sheetName, forceChangeSheet) {
     // If we've got selected marks then process them and show our update button
-    //TODO: the bug here is that the [0] is incorrect because it has Qconcat. I can change this to [1], but really it should do a check.
-    // because if the other column is selected, [1] is empty.
     if (selectedMarks.data[1].totalRowCount > 0) {
       populateTable(selectedMarks.data[1]);
       $('#updateItem').show();
@@ -62,16 +60,17 @@ $(document).ready(function () {
     let productIndex, stockIndex, orderedIndex, rowIDIndex;
 
     // get our column indexes
+    //stock and ordered seem to be flipped for some reason in the datatable (bug?) so reversing them here.
     for (let c of dt.columns) {
       switch (c.fieldName) {
         case 'Product Name':
           productIndex = c.index;
           break;
         case 'SUM(Stock)':
-          stockIndex = c.index;
+          orderedIndex = c.index;
           break;
         case 'SUM(Ordered)':
-          orderedIndex = c.index;
+          stockIndex = c.index;
           break;
         case 'RowID':
           rowIDIndex = c.index;
@@ -92,11 +91,12 @@ $(document).ready(function () {
   }
 
   $('form').submit(function (event) {
+    event.preventDefault();
     let formInputs = $('form#projectTasks :input[type="text"]');
     let postData = [];
 
     formInputs.each(function () {
-      let = $(this);
+      let c = $(this);
       postData.push({id: c[0].id, 'value': c[0].value});
     });
 
@@ -112,6 +112,6 @@ $(document).ready(function () {
       })
     );
 
-    event.preventDefault();
+    // event.preventDefault();
   });
 });
