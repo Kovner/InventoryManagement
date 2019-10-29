@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest manifest-version="0.1" xmlns="http://wwww.tableau.com/xml/extension_manifest">
+<manifest manifest-version="0.1" xmlns="http://www.tableau.com/xml/extension_manifest">
   <dashboard-extension id="com.tableau.extension.inventorymanagement" extension-version="0.9.0">
     <default-locale>en_US</default-locale>
     <name resource-id="name"/>
     <description>Extensions API sample showing how to do write-back for an inventory management dashboard.</description>
-    <author name="Michael Kovner" email="mkovner@tableau.com" organization="Kovner" website="github.com/Kovner"/>
+    <author name="Michael Kovner" email="mkovner@tableau.com" organization="Kovner" website="https://github.com/Kovner"/>
     <min-api-version>0.9</min-api-version>
     <source-location>
       <url>http://localhost:8765</url>
