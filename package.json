@@ -12,7 +12,7 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "xlsx": "^0.9.13"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "semistandard": "^11.0.0"
